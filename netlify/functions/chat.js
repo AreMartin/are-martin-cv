@@ -163,8 +163,9 @@ try {
             body: JSON.stringify(body)
         });
 
-        if (!response.ok) {
-            throw new Error(`Google API svarte med feilkode: ${response.status}`);
+       if (!response.ok) {
+            const googleError = await response.text();
+            throw new Error(`Google API svarte med feilkode: ${response.status}. Detaljer: ${googleError}`);
         }
 
         const data = await response.json();
