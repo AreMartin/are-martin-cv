@@ -69,7 +69,6 @@
         <!-- Header -->
         <div class="px-6 py-4 mx-3 mt-3 sm:mx-6 sm:mt-6 flex items-center border border-slate-200/60 bg-white/60 backdrop-blur-xl rounded-2xl shrink-0 z-20 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
             <div class="w-12 h-12 rounded-full p-[2px] bg-gradient-to-tr from-slate-200 to-slate-400 shadow-sm flex-shrink-0">
-                <!-- Beholder profilbildet ditt i toppen -->
                 <img src="profilbilde.png" onerror="this.onerror=null; this.src='https://placehold.co/100x100/1e293b/ffffff?text=AM';" alt="Are Martin" class="w-full h-full rounded-full object-cover">
             </div>
             <div class="ml-4 flex-1">
@@ -81,10 +80,10 @@
             </div>
         </div>
 
-        <!-- Chat Area -->
+        <!-- Chat Area (her har vi lagt skrive-indikatoren inn i bunnen) -->
         <div id="chat-box" class="chat-container flex-1 p-6 overflow-y-auto flex flex-col gap-6 scroll-smooth">
+            
             <div class="flex items-start message-enter">
-                <!-- Her er robot-ikonet for velkomstmeldingen -->
                 <div class="w-8 h-8 rounded-full bg-white border border-slate-200 flex items-center justify-center shadow-sm shrink-0 mt-1">
                     <i class="fa-solid fa-robot text-slate-500 text-[13px]"></i>
                 </div>
@@ -109,15 +108,21 @@
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Typing Indicator -->
-        <div id="typing-indicator" class="hidden px-6 py-2 pb-4 flex items-center gap-2 text-slate-400 bg-transparent shrink-0">
-            <div class="flex items-center gap-1.5 ml-[44px]"> 
-                <div class="w-1.5 h-1.5 bg-slate-400 rounded-full typing-dot"></div>
-                <div class="w-1.5 h-1.5 bg-slate-400 rounded-full typing-dot"></div>
-                <div class="w-1.5 h-1.5 bg-slate-400 rounded-full typing-dot"></div>
+            <!-- Oppdatert Typing Indicator (skjult som standard) -->
+            <div id="typing-indicator" class="hidden items-start message-enter">
+                <div class="w-8 h-8 rounded-full bg-white border border-slate-200 flex items-center justify-center shadow-sm shrink-0 mt-1 mr-3">
+                    <i class="fa-solid fa-robot text-slate-500 text-[13px]"></i>
+                </div>
+                <div class="backdrop-blur-md bg-white/80 border border-white/60 p-4 rounded-2xl rounded-tl-[4px] shadow-[0_4px_16px_rgba(0,0,0,0.03)] h-[44px] flex items-center">
+                    <div class="flex items-center gap-1.5"> 
+                        <div class="w-1.5 h-1.5 bg-slate-400 rounded-full typing-dot"></div>
+                        <div class="w-1.5 h-1.5 bg-slate-400 rounded-full typing-dot"></div>
+                        <div class="w-1.5 h-1.5 bg-slate-400 rounded-full typing-dot"></div>
+                    </div>
+                </div>
             </div>
+
         </div>
 
         <!-- Input Area & Quick Actions -->
@@ -177,7 +182,6 @@
             const messageDiv = document.createElement('div');
             messageDiv.className = `flex items-start message-enter ${isUser ? 'justify-end' : ''}`;
             
-            // Her er robot-ikonet for alle nye meldinger fra AI-en
             let iconHtml = isUser 
                 ? `` 
                 : `<div class="w-8 h-8 rounded-full bg-white border border-slate-200 flex items-center justify-center shadow-sm shrink-0 mt-1 mr-3">
@@ -240,10 +244,14 @@
         async function handleSend(message) {
             if (!message) return;
 
+            // 1. Skriv ut brukerens melding
             appendMessage(message, true);
             chatHistory.push({ role: "user", parts: [{ text: message }] });
             
+            // 2. Flytt indikatoren til bunnen av listen og gjør den synlig
+            chatBox.appendChild(typingIndicator);
             typingIndicator.classList.remove('hidden');
+            typingIndicator.classList.add('flex');
             scrollToBottom();
 
             await fetchGeminiResponse();
@@ -276,16 +284,22 @@
                 const aiText = result.candidates?.[0]?.content?.parts?.[0]?.text;
 
                 if (aiText) {
+                    // Skjul indikatoren før det faktiske svaret skrives ut
+                    typingIndicator.classList.add('hidden');
+                    typingIndicator.classList.remove('flex');
+                    
                     appendMessage(aiText, false);
                     chatHistory.push({ role: "model", parts: [{ text: aiText }] });
                 }
 
             } catch (error) {
                 console.error("Feil:", error);
-                appendMessage("Beklager, serveren mistet forbindelsen. Prøv igjen, eller bruk kontaktknappene under! 🔌", false);
-            } finally {
+                
+                // Skjul indikatoren ved feil også
                 typingIndicator.classList.add('hidden');
-                scrollToBottom();
+                typingIndicator.classList.remove('flex');
+                
+                appendMessage("Beklager, serveren mistet forbindelsen. Prøv igjen, eller bruk kontaktknappene under! 🔌", false);
             }
         }
     </script>
