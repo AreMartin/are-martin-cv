@@ -87,8 +87,9 @@
         <!-- Chat Area -->
         <div id="chat-box" class="chat-container flex-1 p-6 overflow-y-auto flex flex-col gap-6 scroll-smooth">
             <div class="flex items-start message-enter">
-                <div class="w-8 h-8 rounded-full bg-white border border-slate-200 flex items-center justify-center shadow-sm shrink-0 mt-1">
-                    <i class="fa-solid fa-sparkles text-slate-400 text-xs"></i>
+                <!-- Her er bildet til velkomstmeldingen oppdatert -->
+                <div class="w-8 h-8 rounded-full bg-white border border-slate-200 flex items-center justify-center shadow-sm shrink-0 mt-1 overflow-hidden">
+                    <img src="profilbilde.png" onerror="this.onerror=null; this.src='https://placehold.co/100x100/1e293b/ffffff?text=AI';" alt="AI Bot" class="w-full h-full object-cover">
                 </div>
                 <div class="ml-3 backdrop-blur-md bg-white/80 border border-white/60 p-4 rounded-2xl rounded-tl-[4px] shadow-[0_4px_16px_rgba(0,0,0,0.03)] max-w-[85%] text-slate-800 text-[15px] leading-relaxed">
                     Hei! 👋 Jeg er den digitale assistenten til Are Martin. Jeg kjenner CV-en, erfaringen og prosjektene hans ut og inn. 
@@ -179,9 +180,12 @@
             const messageDiv = document.createElement('div');
             messageDiv.className = `flex items-start message-enter ${isUser ? 'justify-end' : ''}`;
             
+            // Her er bildet oppdatert i JavaScriptet som genererer nye meldinger
             let iconHtml = isUser 
                 ? `` 
-                : `<div class="w-8 h-8 rounded-full bg-white border border-slate-200 flex items-center justify-center shadow-sm shrink-0 mt-1 mr-3"><i class="fa-solid fa-sparkles text-slate-400 text-xs"></i></div>`;
+                : `<div class="w-8 h-8 rounded-full bg-white border border-slate-200 flex items-center justify-center shadow-sm shrink-0 mt-1 mr-3 overflow-hidden">
+                       <img src="profilbilde.png" onerror="this.onerror=null; this.src='https://placehold.co/100x100/1e293b/ffffff?text=AI';" alt="AI Bot" class="w-full h-full object-cover">
+                   </div>`;
 
             let bubbleClass = isUser
                 ? `bg-slate-800 text-white rounded-2xl rounded-tr-[4px] shadow-md`
@@ -191,7 +195,6 @@
             let tipsButtonsHtml = '';
             
             if (!isUser) {
-                // Hent ut dynamiske tips-knapper hvis AI-en sender med det
                 const regex = /\[TIPS:\s*(.*?)\]/g;
                 const tips = [];
                 let match;
@@ -216,14 +219,11 @@
                     `;
                 }
 
-                // Gjør om AI-ens Markdown (som **tekst**) til ekte HTML-elementer
                 formattedText = marked.parse(formattedText);
             } else {
-                // Brukerens tekst bevares som ren tekst (men med linjeskift)
                 formattedText = formattedText.replace(/\n/g, '<br>');
             }
 
-            // Bygger innholdet i boblen. Vi legger en "markdown-body"-klasse på botens tekst for å aktivere listestilene i CSS-en
             messageDiv.innerHTML = `
                 ${!isUser ? iconHtml : ''}
                 <div class="p-4 max-w-[85%] text-[15px] leading-relaxed flex flex-col ${bubbleClass}">
