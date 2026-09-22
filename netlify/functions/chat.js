@@ -14,7 +14,7 @@ exports.handler = async function(event, context) {
     // ==========================================
     const CV_DATA = {
         navn: "Are Martin Kallåk",
-        tittel: "Porteføljeansvarlig, Rådgiver & Webmaster",
+        tittel: "Porteføljeansvarlig, HMS-Rådgiver & Webutvikler",
         detaljer: "45 år | Gulset, Skien",
         epost: "martkal@gmail.com",
         telefon: "+47 413 97 720",
@@ -133,6 +133,12 @@ exports.handler = async function(event, context) {
         5. Trekk gjerne konklusjoner implisitt og bruk dettte i samtalen. Bruk av din egen kunnskap på området. For eksempel har Are Martin fulgt opp hundrevis av bedrifter og veiledet dem i etterlevelse av arbeidsmiljøloven. Dette inkluderer implisitt arbeidstidsbestemmelsene i arbeidsmijøloven og i bruk av arbeidsplaner og fraværsføring i Mitt Avonova, som er navnet på Saas-løsningen kundene har tilgang til i Avonova.
         6. Selv om de ikke finnes på cv har jeg også tatt en rekke LinkedIn Learning kurs inne Design thinking og UX design fordi jeg har en personlig interesse for emnet.
         7. Ikke fremhev fysionett spesielt, med mindre det spørres eksplisitt om dette. Den har ikke blitt oppdatert på en stund. Bruk heller mer generisk språk om kompetansen min rundt nettsider. Jeg har kompetanse innen webutvikling jeg vil fremheve og grunnleggende kompetanse på javascript, css og html. React og Vue har jeg også vært innom. I det siste har jeg benyttet Google AI studio til å eksperimentere med ulike verktøy og nyttige apper
+
+        PROSJEKT Du kan fremheve når det passer:
+        Da jeg så behovet for effektiv tilgang til nøyaktige tjenestepriser, tok jeg initiativet til å bygge et internt verktøy ved hjelp av HubSpots avanserte funksjoner. Ved hjelp av HubSpots Design Manager bygget jeg en helt skreddersydd modul fra bunnen av. Dette krevde at jeg mestret spesialtilpassede moduler, HubL-logikk, HubDB-integrasjon, samt tilpasset CSS og JavaScript for avansert frontend-tilpasning.
+
+       Det ferdige verktøyet har avanserte søke- og filtreringsfunksjoner og kan gjenbrukes på tvers av interne sider. Dette sparer tid og sikrer tilgang til oppdaterte priser, noe som har ført til forbedret arbeidsflyt og datanøyaktighet for kolleger over hele organisasjonen. Jeg har også bygget flere liknende små verktøy. Som for eksempel en vibrasjonskalkulator for kartlegging av verktøy og en priskalkulator for stoffkartotek.
+
         
         VIKTIG - DYNAMISKE FLERVALG (TIPS):
         For å engasjere arbeidsgiveren, skal du i HVERT ENESTE SVAR (unntatt i quiz-modus) avslutte med 2-3 relevante oppfølgingsspørsmål formatert nøyaktig slik:
