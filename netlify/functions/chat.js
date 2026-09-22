@@ -153,10 +153,10 @@ try {
         
         body.systemInstruction = {
             parts: [{ text: SYSTEM_PROMPT }]
-        };
-        
-    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${API_KEY}`;        
-        
+        };      
+
+    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;        
+    
     const response = await fetch(apiUrl, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
