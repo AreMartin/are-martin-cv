@@ -12,7 +12,7 @@
         
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-            background-color: #f8fafc; /* Veldig lys Slate (nesten hvit) */
+            background-color: #f8fafc;
         }
 
         .chat-container {
@@ -36,7 +36,6 @@
             to { opacity: 1; transform: translateY(0) scale(1); }
         }
 
-        /* Ny bølge-animasjon for skrive-indikatoren */
         .typing-dot { 
             animation: wave 1.3s linear infinite; 
         }
@@ -49,7 +48,6 @@
             30% { transform: translateY(-6px); }
         }
 
-        /* Gjenoppretter listestiler og mellomrom for Markdown (Tailwind fjerner dette som standard) */
         .markdown-body p { margin-bottom: 0.75em; }
         .markdown-body p:last-child { margin-bottom: 0; }
         .markdown-body ul { list-style-type: disc; margin-left: 1.25em; margin-bottom: 0.75em; }
@@ -63,16 +61,15 @@
 </head>
 <body class="relative h-screen flex justify-center overflow-hidden text-slate-800 antialiased">
 
-    <!-- Subtile bakgrunnsdetaljer for glasseffekten -->
     <div class="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-slate-300/30 blur-[100px] pointer-events-none"></div>
     <div class="absolute bottom-[-10%] right-[-10%] w-[50vw] h-[50vw] rounded-full bg-blue-100/40 blur-[120px] pointer-events-none"></div>
 
-    <!-- Hovedkolonne -->
     <div class="relative w-full max-w-3xl h-full flex flex-col z-10">
         
         <!-- Header -->
         <div class="px-6 py-4 mx-3 mt-3 sm:mx-6 sm:mt-6 flex items-center border border-slate-200/60 bg-white/60 backdrop-blur-xl rounded-2xl shrink-0 z-20 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
             <div class="w-12 h-12 rounded-full p-[2px] bg-gradient-to-tr from-slate-200 to-slate-400 shadow-sm flex-shrink-0">
+                <!-- Beholder profilbildet ditt i toppen -->
                 <img src="profilbilde.png" onerror="this.onerror=null; this.src='https://placehold.co/100x100/1e293b/ffffff?text=AM';" alt="Are Martin" class="w-full h-full rounded-full object-cover">
             </div>
             <div class="ml-4 flex-1">
@@ -87,9 +84,9 @@
         <!-- Chat Area -->
         <div id="chat-box" class="chat-container flex-1 p-6 overflow-y-auto flex flex-col gap-6 scroll-smooth">
             <div class="flex items-start message-enter">
-                <!-- Her er bildet til velkomstmeldingen oppdatert -->
-                <div class="w-8 h-8 rounded-full bg-white border border-slate-200 flex items-center justify-center shadow-sm shrink-0 mt-1 overflow-hidden">
-                    <img src="profilbilde.png" onerror="this.onerror=null; this.src='https://placehold.co/100x100/1e293b/ffffff?text=AI';" alt="AI Bot" class="w-full h-full object-cover">
+                <!-- Her er robot-ikonet for velkomstmeldingen -->
+                <div class="w-8 h-8 rounded-full bg-white border border-slate-200 flex items-center justify-center shadow-sm shrink-0 mt-1">
+                    <i class="fa-solid fa-robot text-slate-500 text-[13px]"></i>
                 </div>
                 <div class="ml-3 backdrop-blur-md bg-white/80 border border-white/60 p-4 rounded-2xl rounded-tl-[4px] shadow-[0_4px_16px_rgba(0,0,0,0.03)] max-w-[85%] text-slate-800 text-[15px] leading-relaxed">
                     Hei! 👋 Jeg er den digitale assistenten til Are Martin. Jeg kjenner CV-en, erfaringen og prosjektene hans ut og inn. 
@@ -180,11 +177,11 @@
             const messageDiv = document.createElement('div');
             messageDiv.className = `flex items-start message-enter ${isUser ? 'justify-end' : ''}`;
             
-            // Her er bildet oppdatert i JavaScriptet som genererer nye meldinger
+            // Her er robot-ikonet for alle nye meldinger fra AI-en
             let iconHtml = isUser 
                 ? `` 
-                : `<div class="w-8 h-8 rounded-full bg-white border border-slate-200 flex items-center justify-center shadow-sm shrink-0 mt-1 mr-3 overflow-hidden">
-                       <img src="profilbilde.png" onerror="this.onerror=null; this.src='https://placehold.co/100x100/1e293b/ffffff?text=AI';" alt="AI Bot" class="w-full h-full object-cover">
+                : `<div class="w-8 h-8 rounded-full bg-white border border-slate-200 flex items-center justify-center shadow-sm shrink-0 mt-1 mr-3">
+                       <i class="fa-solid fa-robot text-slate-500 text-[13px]"></i>
                    </div>`;
 
             let bubbleClass = isUser
