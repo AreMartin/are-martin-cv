@@ -164,7 +164,7 @@ const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1
         });
 
         if (!response.ok) {
-            throw new Error(\`Google API svarte med feilkode: \${response.status}\`);
+           throw new Error(`Google API svarte med feilkode: ${response.status}`);
         }
 
         const data = await response.json();
