@@ -148,14 +148,14 @@ exports.handler = async function(event, context) {
         5. Når de svarer, reager med entusiasme (eller litt vennlig erting hvis de tar feil), avslør fasiten kort, og still neste spørsmål (eller spør om de vil ha flere spørsmål).
     `;
 
-    try {
+try {
         const body = JSON.parse(event.body);
         
         body.systemInstruction = {
             parts: [{ text: SYSTEM_PROMPT }]
         };
         
-const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
+        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
         
         const response = await fetch(apiUrl, {
             method: 'POST',
@@ -164,7 +164,7 @@ const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1
         });
 
         if (!response.ok) {
-           throw new Error(`Google API svarte med feilkode: ${response.status}`);
+            throw new Error(`Google API svarte med feilkode: ${response.status}`);
         }
 
         const data = await response.json();
