@@ -2,7 +2,6 @@
 <html lang="no">
 <head>
     <meta charset="UTF-8">
-    <!-- Viewport oppdatert for å forhindre zoom og låse skjermen helt som en ekte app -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, interactive-widget=resizes-content, viewport-fit=cover">
     <title>Are Martin - Interaktiv CV</title>
     <script src="https://cdn.tailwindcss.com"></script>
@@ -11,13 +10,10 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
         
-        /* Ekstra låsing av bredde for å fjerne sideveis scroll på mobil */
         html, body {
-            overflow-x: hidden;
+            overflow: hidden; /* Fjerner all standard scroll på selve nettsiden */
             width: 100%;
-            max-width: 100vw;
-            /* Fjerner sprett-effekten på hele skjermen slik at kun chat-vinduet scroller */
-            overscroll-behavior-y: none;
+            overscroll-behavior: none; /* Stopper Apples "sprett"-effekt i kantene */
         }
 
         body {
@@ -69,7 +65,8 @@
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
-<body class="relative h-[100dvh] flex justify-center overflow-hidden text-slate-800 antialiased">
+<!-- LØSNING 1: Byttet til "fixed inset-0" for å låse alle fire hjørner til skjermen -->
+<body class="fixed inset-0 flex justify-center overflow-hidden text-slate-800 antialiased">
 
     <div class="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-slate-300/30 blur-[100px] pointer-events-none"></div>
     <div class="absolute bottom-[-10%] right-[-10%] w-[50vw] h-[50vw] rounded-full bg-blue-100/40 blur-[120px] pointer-events-none"></div>
@@ -158,7 +155,6 @@
             </div>
 
             <form id="chat-form" class="relative flex items-center">
-                <!-- Her er tekststørrelsen endret fra text-[15px] til text-[16px] for å blokkere auto-zoom i Safari -->
                 <input 
                     type="text" 
                     id="user-input" 
@@ -177,13 +173,14 @@
         </div>
     </div>
 
-   <script>
+    <script>
         const chatForm = document.getElementById('chat-form');
         const userInput = document.getElementById('user-input');
         const chatBox = document.getElementById('chat-box');
         const typingIndicator = document.getElementById('typing-indicator');
 
         let chatHistory = [];
+        let lastUserMessageElement = null; // Variabel for å huske hvor spørsmålet ditt er
 
         function scrollToBottom() {
             chatBox.scrollTop = chatBox.scrollHeight;
@@ -246,21 +243,19 @@
 
             chatBox.appendChild(messageDiv);
             
-            // SMART SCROLL LOGIKK
+            // LØSNING 2: Smart contextual scroll
             if (isUser) {
+                lastUserMessageElement = messageDiv; // Lagrer referansen til spørsmålet ditt
                 scrollToBottom();
             } else {
-                // Gir nettleseren 50 millisekunder til å bygge HTML-en før vi måler høyden
                 setTimeout(() => {
                     const messageHeight = messageDiv.offsetHeight;
                     const boxHeight = chatBox.clientHeight;
                     
-                    // Hvis meldingen tar opp mer enn 70% av det synlige vinduet, regner vi den som "lang"
-                    if (messageHeight > boxHeight * 0.7) {
-                        // Scroll til toppen av den nye meldingen (minus 24px luft over)
-                        chatBox.scrollTop = messageDiv.offsetTop - 24;
+                    // Er AI-svaret langt? Scroller vi til spørsmålet ditt i stedet for bunnen.
+                    if (messageHeight > boxHeight * 0.6 && lastUserMessageElement) {
+                        chatBox.scrollTop = lastUserMessageElement.offsetTop - 20; // 20px "pusterom" over spørsmålet
                     } else {
-                        // Kort melding -> Scroll helt ned
                         scrollToBottom();
                     }
                 }, 50);
