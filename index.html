@@ -235,7 +235,11 @@
             `;
 
             chatBox.appendChild(messageDiv);
-            scrollToBottom();
+            
+            // Kun auto-scroll til bunnen for brukerens egne meldinger.
+            if (isUser) {
+                scrollToBottom();
+            }
         }
 
         window.sendTip = function(text) {
@@ -245,14 +249,14 @@
         async function handleSend(message) {
             if (!message) return;
 
-            // 1. Skriv ut brukerens melding
             appendMessage(message, true);
             chatHistory.push({ role: "user", parts: [{ text: message }] });
             
-            // 2. Flytt indikatoren til bunnen av listen og gjør den synlig
             chatBox.appendChild(typingIndicator);
             typingIndicator.classList.remove('hidden');
             typingIndicator.classList.add('flex');
+            
+            // Sikrer at prikkene alltid er synlige når AI-en "tenker"
             scrollToBottom();
 
             await fetchGeminiResponse();
@@ -285,7 +289,6 @@
                 const aiText = result.candidates?.[0]?.content?.parts?.[0]?.text;
 
                 if (aiText) {
-                    // Skjul indikatoren før det faktiske svaret skrives ut
                     typingIndicator.classList.add('hidden');
                     typingIndicator.classList.remove('flex');
                     
@@ -296,7 +299,6 @@
             } catch (error) {
                 console.error("Feil:", error);
                 
-                // Skjul indikatoren ved feil også
                 typingIndicator.classList.add('hidden');
                 typingIndicator.classList.remove('flex');
                 
