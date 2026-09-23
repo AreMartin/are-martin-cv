@@ -99,23 +99,23 @@
                     Lurer du på om Are har riktig kompetanse for dere? Spør meg om hva som helst, eller kjør i gang en CV-quiz hvis du tør! 
                     
                     <div class="flex flex-wrap gap-2 mt-4 pt-3 border-t border-slate-200/60">
-                        <button onclick="sendTip('Hva er din sterkeste side?')" class="text-left px-4 py-2 bg-white/50 hover:bg-slate-100 hover:border-slate-300 border border-slate-200 text-slate-700 text-sm rounded-xl transition-all duration-200 shadow-sm font-medium">
+                        <button onclick="sendTip('Hva er din sterkeste side?')" class="text-left px-3.5 py-2 bg-white/50 hover:bg-slate-100 hover:border-slate-300 border border-slate-200 text-slate-700 text-sm rounded-xl transition-all duration-200 shadow-sm font-medium">
                             Hva er din sterkeste side?
                         </button>
-                        <button onclick="sendTip('Fortell om et spennende prosjekt!')" class="text-left px-4 py-2 bg-white/50 hover:bg-slate-100 hover:border-slate-300 border border-slate-200 text-slate-700 text-sm rounded-xl transition-all duration-200 shadow-sm font-medium">
+                        <button onclick="sendTip('Fortell om et spennende prosjekt!')" class="text-left px-3.5 py-2 bg-white/50 hover:bg-slate-100 hover:border-slate-300 border border-slate-200 text-slate-700 text-sm rounded-xl transition-all duration-200 shadow-sm font-medium">
                             Fortell om et spennende prosjekt!
                         </button>
-                        <button onclick="sendTip('Hvorfor bør vi ansette deg?')" class="text-left px-4 py-2 bg-white/50 hover:bg-slate-100 hover:border-slate-300 border border-slate-200 text-slate-700 text-sm rounded-xl transition-all duration-200 shadow-sm font-medium">
+                        <button onclick="sendTip('Hvorfor bør vi ansette deg?')" class="text-left px-3.5 py-2 bg-white/50 hover:bg-slate-100 hover:border-slate-300 border border-slate-200 text-slate-700 text-sm rounded-xl transition-all duration-200 shadow-sm font-medium">
                             Hvorfor bør vi ansette deg?
                         </button>
-                        <button onclick="sendTip('Fortell meg en pappavits!')" class="text-left px-4 py-2 bg-white/50 hover:bg-slate-100 hover:border-slate-300 border border-slate-200 text-slate-700 text-sm rounded-xl transition-all duration-200 shadow-sm font-medium">
+                        <button onclick="sendTip('Fortell meg en pappavits!')" class="text-left px-3.5 py-2 bg-white/50 hover:bg-slate-100 hover:border-slate-300 border border-slate-200 text-slate-700 text-sm rounded-xl transition-all duration-200 shadow-sm font-medium">
                             Fortell meg en pappavits!
                         </button>
                     </div>
                 </div>
             </div>
 
-            <!-- Typing Indicator (skjult som standard) -->
+            <!-- Typing Indicator -->
             <div id="typing-indicator" class="hidden items-start message-enter">
                 <div class="w-8 h-8 rounded-full bg-white border border-slate-200 flex items-center justify-center shadow-sm shrink-0 mt-1 mr-3">
                     <i class="fa-solid fa-robot text-slate-500 text-[13px]"></i>
@@ -134,28 +134,28 @@
         <!-- Input Area & Quick Actions -->
         <div class="p-4 sm:p-5 mx-3 mb-3 sm:mx-6 sm:mb-6 bg-white/60 backdrop-blur-xl border border-slate-200/60 rounded-[2rem] shrink-0 z-20 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
             
-            <!-- OPPDATERT: En "relative" boks med en visuell fadet kant til høyre -->
             <div class="relative mb-4">
-                <div class="flex gap-3 overflow-x-auto no-scrollbar pb-1 pr-10">
-                    <button onclick="sendTip('Jeg vil gjerne ta en CV-quiz om Are!')" class="flex items-center gap-2 px-4 py-2 bg-indigo-50 hover:bg-indigo-100 border border-indigo-200/80 rounded-full text-sm font-medium text-indigo-700 transition-all shadow-sm whitespace-nowrap">
+                <!-- OPPDATERT: Endret fra gap-3 til gap-2, og redusert innvendig padding på knappene til px-3.5 -->
+                <div class="flex gap-2 overflow-x-auto no-scrollbar pb-1 pr-10">
+                    <button onclick="sendTip('Jeg vil gjerne ta en CV-quiz om Are!')" class="flex items-center gap-2 px-3.5 py-2 bg-indigo-50 hover:bg-indigo-100 border border-indigo-200/80 rounded-full text-sm font-medium text-indigo-700 transition-all shadow-sm whitespace-nowrap">
                         <i class="fa-solid fa-gamepad"></i> Start CV-Quiz
                     </button>
-                    <a href="tel:+4799999999" class="flex items-center gap-2 px-4 py-2 bg-white/70 hover:bg-white backdrop-blur-md border border-slate-200/80 rounded-full text-sm font-medium text-slate-700 transition-all shadow-sm whitespace-nowrap">
+                    <a href="tel:+4799999999" class="flex items-center gap-2 px-3.5 py-2 bg-white/70 hover:bg-white backdrop-blur-md border border-slate-200/80 rounded-full text-sm font-medium text-slate-700 transition-all shadow-sm whitespace-nowrap">
                         <i class="fa-solid fa-phone text-slate-500"></i> Ring Are
                     </a>
-                    <a href="mailto:martkal@gmail.com" class="flex items-center gap-2 px-4 py-2 bg-white/70 hover:bg-white backdrop-blur-md border border-slate-200/80 rounded-full text-sm font-medium text-slate-700 transition-all shadow-sm whitespace-nowrap">
+                    <a href="mailto:martkal@gmail.com" class="flex items-center gap-2 px-3.5 py-2 bg-white/70 hover:bg-white backdrop-blur-md border border-slate-200/80 rounded-full text-sm font-medium text-slate-700 transition-all shadow-sm whitespace-nowrap">
                         <i class="fa-solid fa-envelope text-slate-500"></i> Send mail
                     </a>
-                    <a href="/.netlify/functions/chat" target="_blank" class="flex items-center gap-2 px-4 py-2 bg-white/70 hover:bg-white backdrop-blur-md border border-slate-200/80 rounded-full text-sm font-medium text-slate-700 transition-all shadow-sm whitespace-nowrap">
+                    <a href="/.netlify/functions/chat" target="_blank" class="flex items-center gap-2 px-3.5 py-2 bg-white/70 hover:bg-white backdrop-blur-md border border-slate-200/80 rounded-full text-sm font-medium text-slate-700 transition-all shadow-sm whitespace-nowrap">
                         <i class="fa-solid fa-file-pdf text-red-500"></i> Last ned CV
                     </a>
                     <a href="mailto:martkal@gmail.com?subject=Innkalling%20til%20intervju%20-%20Are%20Martin&body=Hei%20Are!%0A%0AVi%20likte%20CV-chatboten%20din%20veldig%20godt,%20og%20vil%20gjerne%20ta%20en%20prat..." 
-                       class="flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded-full text-sm font-medium transition-all shadow-md whitespace-nowrap">
+                       class="flex items-center gap-2 px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded-full text-sm font-medium transition-all shadow-md whitespace-nowrap">
                         <i class="fa-solid fa-calendar-check"></i> Intervju
                     </a>
                 </div>
-                <!-- Fade-effekten som indikerer mer innhold til høyre -->
-                <div class="absolute right-0 top-0 bottom-1 w-12 bg-gradient-to-l from-white/90 to-transparent pointer-events-none rounded-r-xl"></div>
+                <!-- OPPDATERT: Lagt til "md:hidden" for å fjerne fade-skyggen på PC/nettbrett -->
+                <div class="absolute right-0 top-0 bottom-1 w-12 bg-gradient-to-l from-white/90 to-transparent pointer-events-none rounded-r-xl md:hidden"></div>
             </div>
 
             <form id="chat-form" class="relative flex items-center">
@@ -219,8 +219,9 @@
                 formattedText = formattedText.replace(/\[TIPS:\s*(.*?)\]/g, '').trim();
                 
                 if (tips.length > 0) {
+                    // Vi oppdaterer paddingen (px-3.5) på tips-knappene også for å matche stilendringen
                     let buttons = tips.map(tip => `
-                        <button onclick="sendTip('${tip.replace(/'/g, "\\'")}')" class="text-left px-4 py-2 bg-white/50 hover:bg-slate-100 hover:border-slate-300 border border-slate-200 text-slate-700 text-sm rounded-xl transition-all duration-200 shadow-sm font-medium mt-2">
+                        <button onclick="sendTip('${tip.replace(/'/g, "\\'")}')" class="text-left px-3.5 py-2 bg-white/50 hover:bg-slate-100 hover:border-slate-300 border border-slate-200 text-slate-700 text-sm rounded-xl transition-all duration-200 shadow-sm font-medium mt-2">
                             ${tip}
                         </button>
                     `).join('');
