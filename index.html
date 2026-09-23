@@ -177,7 +177,7 @@
         </div>
     </div>
 
-    <script>
+   <script>
         const chatForm = document.getElementById('chat-form');
         const userInput = document.getElementById('user-input');
         const chatBox = document.getElementById('chat-box');
@@ -246,8 +246,24 @@
 
             chatBox.appendChild(messageDiv);
             
+            // SMART SCROLL LOGIKK
             if (isUser) {
                 scrollToBottom();
+            } else {
+                // Gir nettleseren 50 millisekunder til å bygge HTML-en før vi måler høyden
+                setTimeout(() => {
+                    const messageHeight = messageDiv.offsetHeight;
+                    const boxHeight = chatBox.clientHeight;
+                    
+                    // Hvis meldingen tar opp mer enn 70% av det synlige vinduet, regner vi den som "lang"
+                    if (messageHeight > boxHeight * 0.7) {
+                        // Scroll til toppen av den nye meldingen (minus 24px luft over)
+                        chatBox.scrollTop = messageDiv.offsetTop - 24;
+                    } else {
+                        // Kort melding -> Scroll helt ned
+                        scrollToBottom();
+                    }
+                }, 50);
             }
         }
 
